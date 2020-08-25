@@ -8,7 +8,7 @@ is **23:59 EET 10/01/2021**.
 
 | Part | Description                                                                                        | Hours |
 | :--- | :------------------------------------------------------------------------------------------------- | :---- |
-| 0    | [Fundamentals of Web apps](https://fullstackopen.com/en/part0)                                     | n/a   |
+| 0    | [Fundamentals of Web apps](https://fullstackopen.com/en/part0)                                     | 2.17  |
 | 1    | [Introduction to React](https://fullstackopen.com/en/part1)                                        | n/a   |
 | 2    | [Communicating with server](https://fullstackopen.com/en/part2)                                    | n/a   |
 | 3    | [Programming a server with NodeJS and Express](https://fullstackopen.com/en/part3)                 | n/a   |
