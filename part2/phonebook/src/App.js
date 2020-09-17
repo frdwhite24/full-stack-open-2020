@@ -1,26 +1,8 @@
 import React, { useState } from "react";
-
-const Title = ({ text }) => <h1>{text}</h1>;
-
-const Records = ({ persons }) => (
-  <div>
-    {persons.map((person) => (
-      <p key={person.name}>
-        {person.name} - {person.number}
-      </p>
-    ))}
-  </div>
-);
-
-const DisplayRecords = ({ persons, filter }) => {
-  if (filter !== "") {
-    const filteredPersons = persons.filter((person) =>
-      person.name.toLowerCase().includes(filter.toLowerCase())
-    );
-    return <Records persons={filteredPersons} />;
-  }
-  return <Records persons={persons} />;
-};
+import DisplayRecords from "./components/DisplayRecords";
+import Title from "./components/Title";
+import AddRecord from "./components/AddRecord";
+import SearchFilter from "./components/SearchFilter";
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -67,21 +49,12 @@ const App = () => {
   return (
     <div>
       <Title text="Phonebook" />
-      <div>
-        filter shown with <input onChange={handleFilterChange} />
-      </div>
-      <Title text="Add a new record" />
-      <form onSubmit={addRecord}>
-        <div>
-          name: <input onChange={handleNameChange} />
-        </div>
-        <div>
-          number: <input onChange={handleNumberChange} />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <SearchFilter handleFilterChange={handleFilterChange} />
+      <AddRecord
+        handleNameChange={handleNameChange}
+        handleNumberChange={handleNumberChange}
+        addRecord={addRecord}
+      />
       <Title text="Existing records" />
       <DisplayRecords persons={persons} filter={filterValue} />
     </div>
