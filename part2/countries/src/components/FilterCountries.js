@@ -2,7 +2,7 @@ import React from "react";
 import DisplayCountries from "./DisplayCountries";
 import DisplayCountry from "./DisplayCountry";
 
-const FilterCountries = ({ countries, filterVal }) => {
+const FilterCountries = ({ countries, filterVal, showButtonHandler}) => {
   if (filterVal === "") {
     return (
       <div>
@@ -28,7 +28,7 @@ const FilterCountries = ({ countries, filterVal }) => {
   } else if (filteredCountries.length > 1 && filteredCountries.length <= 10) {
     return (
       <>
-        <DisplayCountries countries={filteredCountries} />
+        <DisplayCountries countries={filteredCountries} showButtonHandler={showButtonHandler}/>
       </>
     );
   } else if (filteredCountries.length > 10) {

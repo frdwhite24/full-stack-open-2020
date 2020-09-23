@@ -15,13 +15,15 @@ function App() {
   const handleFilterValChange = (event) => {
     setFilterVal(event.target.value);
   };
+  const handleShowButtonClick = (event) => {
+    setFilterVal(event.target.getAttribute('country'))
+  }
   return (
     <div className="App">
       <Search handler={handleFilterValChange} />
-      <FilterCountries countries={countries} filterVal={filterVal} />
+      <FilterCountries countries={countries} filterVal={filterVal} showButtonHandler={handleShowButtonClick} />
     </div>
   );
 }
 
 export default App;
-// https://restcountries.eu/rest/v2/all

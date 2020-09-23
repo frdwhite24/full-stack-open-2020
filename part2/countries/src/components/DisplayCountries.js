@@ -1,12 +1,15 @@
 import React from "react";
 
-const DisplayCountries = ({ countries }) => {
+const DisplayCountries = ({ countries, showButtonHandler }) => {
   return (
-    <>
+    <ul>
       {countries.map((country) => (
-        <p key={country.name}>{country.name}</p>
+        <li key={country.name}>
+          <span>{country.name} </span>
+          <button country={country.name} type="button" onClick={showButtonHandler}>Show</button>
+        </li>
       ))}
-    </>
+    </ul>
   );
 };
 
