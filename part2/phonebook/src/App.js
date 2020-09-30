@@ -35,16 +35,14 @@ const App = () => {
       personsServices
         .deleteRecord(id)
         .then((response) => {
-          if (response.status === 200) {
-            setPersons(persons.filter((person) => person.id !== id));
-            setNotification({
-              status: "success",
-              message: `The record for ${record.name} has been deleted.`,
-            });
-            setTimeout(() => {
-              setNotification(null);
-            }, 3500);
-          }
+          setPersons(persons.filter((person) => person.id !== id));
+          setNotification({
+            status: "success",
+            message: `The record for ${record.name} has been deleted.`,
+          });
+          setTimeout(() => {
+            setNotification(null);
+          }, 3500);
         })
         .catch((error) => {
           setNotification({
