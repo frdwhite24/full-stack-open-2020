@@ -78,6 +78,15 @@ const App = () => {
           setTimeout(() => {
             setNotification(null);
           }, 3500);
+        })
+        .catch((error) => {
+          setNotification({
+            status: "error",
+            message: error.response.data.error,
+          });
+          setTimeout(() => {
+            setNotification(null);
+          }, 6000);
         });
     } else if (duplicate) {
       if (
@@ -105,11 +114,11 @@ const App = () => {
           .catch((error) => {
             setNotification({
               status: "error",
-              message: `The data for ${duplicate.name} was already deleted from the server.`,
+              message: error.response.data.error,
             });
             setTimeout(() => {
               setNotification(null);
-            }, 3500);
+            }, 6000);
           });
       }
     }
