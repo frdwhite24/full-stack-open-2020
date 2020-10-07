@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint .",
+    "test": "jest --verbose"
   },
   "author": "Fred White",
   "license": "ISC",
@@ -17,6 +18,11 @@
     "mongoose": "^5.10.7"
   },
   "devDependencies": {
+    "eslint": "^7.10.0",
+    "jest": "^26.5.0",
     "nodemon": "^2.0.4"
+  },
+  "jest": {
+      "testEnvironment": "node"
   }
 }
