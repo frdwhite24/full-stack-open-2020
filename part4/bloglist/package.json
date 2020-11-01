@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
     "lint": "eslint .",
-    "test": "jest --verbose"
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand"
   },
   "author": "Fred White",
   "license": "ISC",
@@ -18,11 +18,13 @@
     "mongoose": "^5.10.7"
   },
   "devDependencies": {
+    "cross-env": "^7.0.2",
     "eslint": "^7.10.0",
     "jest": "^26.5.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "supertest": "^6.0.0"
   },
   "jest": {
-      "testEnvironment": "node"
+    "testEnvironment": "node"
   }
 }
