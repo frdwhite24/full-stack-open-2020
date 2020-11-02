@@ -121,6 +121,6 @@ describe("updating a note", () => {
   });
 });
 
-afterAll(() => {
-  mongoose.connection.close();
+afterAll(async () => {
+  await mongoose.connection.close();
 });
