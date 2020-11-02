@@ -1,10 +1,10 @@
-const supertest = require("supertest");
 const mongoose = require("mongoose");
+const supertest = require("supertest");
 const app = require("../app");
-const api = supertest(app);
-const bcrypt = require("bcrypt");
-const User = require("../models/user");
 const helper = require("./test_helper");
+const api = supertest(app);
+const User = require("../models/user");
+const bcrypt = require("bcrypt");
 
 describe("when there is initially one user in db", () => {
   beforeEach(async () => {
@@ -18,6 +18,7 @@ describe("when there is initially one user in db", () => {
 
   test("creation succeeds with a fresh username", async () => {
     const usersAtStart = await helper.usersInDB();
+    console.log(usersAtStart);
 
     const newUser = {
       name: "Fred White",
@@ -36,6 +37,25 @@ describe("when there is initially one user in db", () => {
 
     expect(usersAtEnd).toHaveLength(usersAtStart.length + 1);
     expect(usernames).toContain(newUser.username);
+  });
+
+  test("duplicate username is not created", async () => {
+    const usersAtStart = await helper.usersInDB();
+    const firstUser = usersAtStart[0];
+
+    const newUser = {
+      name: "John Smith",
+      username: firstUser.username,
+      password: "anotherstrongpassword",
+    };
+
+    const response = await api
+      .post("/api/users")
+      .send(newUser)
+      .expect(400)
+      .expect("Content-Type", /application\/json/);
+
+    expect(response.body.error).toContain("`username` to be unique");
   });
 });
 
