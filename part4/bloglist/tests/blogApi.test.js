@@ -22,6 +22,7 @@ describe("when there is initially some notes saved", () => {
       .get("/api/blogs")
       .expect(200)
       .expect("Content-Type", /application\/json/);
+    console.log("test is passing");
   });
 
   test("all blogs are returned", async () => {
