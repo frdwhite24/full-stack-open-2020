@@ -12,7 +12,7 @@ is **23:59 EET 10/01/2021**.
 | 1     | [Introduction to React](https://fullstackopen.com/en/part1)                                        | 4.50  |
 | 2     | [Communicating with server](https://fullstackopen.com/en/part2)                                    | 11.50 |
 | 3     | [Programming a server with NodeJS and Express](https://fullstackopen.com/en/part3)                 | 10.00 |
-| 4     | [Testing Express servers, user administration](https://fullstackopen.com/en/part4)                 | n/a   |
+| 4     | [Testing Express servers, user administration](https://fullstackopen.com/en/part4)                 | 19.5  |
 | 5     | [Testing React apps](https://fullstackopen.com/en/part5)                                           | n/a   |
 | 6     | [State management with Redux](https://fullstackopen.com/en/part6)                                  | n/a   |
 | 7     | [React router, custom hooks, styling app with CSS and webpack](https://fullstackopen.com/en/part7) | n/a   |
