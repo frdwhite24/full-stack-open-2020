@@ -18,4 +18,4 @@ is **23:59 EET 10/01/2021**.
 | 7     | [React router, custom hooks, styling app with CSS and webpack](https://fullstackopen.com/en/part7) | n/a   |
 | 8     | [GraphQL](https://fullstackopen.com/en/part8)                                                      | n/a   |
 | 9     | [Typescript](https://fullstackopen.com/en/part9)                                                   | n/a   |
-| TOTAL | Total number of hours spent on the course                                                          | 28.17 |
+| TOTAL | Total number of hours spent on the course                                                          | 47.67 |
