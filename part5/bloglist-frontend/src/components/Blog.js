@@ -1,8 +1,45 @@
-import React from 'react'
-const Blog = ({ blog }) => (
-  <div>
-    {blog.title} {blog.author}
-  </div>
-)
+import React, { useState } from "react";
 
-export default Blog
+const Blog = ({ blog, addLike }) => {
+  const [information, setInformation] = useState(false);
+  const baseStyle = {
+    border: "1px solid black",
+    margin: "5px",
+    padding: "10px 5px 10px 5px",
+  };
+  const hideWhenInformation = {
+    ...baseStyle,
+    display: information ? "none" : "",
+  };
+  const showWhenInformation = {
+    ...baseStyle,
+    display: information ? "" : "none",
+  };
+
+  const toggleInformation = () => setInformation(!information);
+
+  const handleAddLike = () => {
+    addLike({ ...blog, likes: blog.likes + 1, user: blog.user.id });
+  };
+
+  return (
+    <>
+      <div style={hideWhenInformation}>
+        <span>
+          {blog.title} {blog.author}
+        </span>
+        <button onClick={toggleInformation}>view</button>
+      </div>
+      <div style={showWhenInformation}>
+        {blog.title} {blog.author}
+        <button onClick={toggleInformation}>hide</button>
+        <p>{blog.url}</p>
+        <span>likes {blog.likes} </span>
+        <button onClick={handleAddLike}>like</button>
+        <p>{blog.user.username}</p>
+      </div>
+    </>
+  );
+};
+
+export default Blog;

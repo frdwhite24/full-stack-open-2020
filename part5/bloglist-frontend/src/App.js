@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Login from "./components/Login";
 import Notification from "./components/Notification";
 import Blogs from "./components/Blogs";
 import Create from "./components/Create";
+import Togglable from "./components/Togglable";
 import blogService from "./services/blogs";
 import loginService from "./services/login";
 
@@ -11,10 +12,8 @@ const App = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
-  const [url, setUrl] = useState("");
   const [notification, setNotification] = useState({});
+  const newBlogFormRef = useRef();
 
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
@@ -70,19 +69,10 @@ const App = () => {
     }, 3000);
   };
 
-  const handleCreate = async (event) => {
-    event.preventDefault();
-    const newBlog = {
-      title,
-      author,
-      url,
-    };
+  const createNewBlog = async (newBlog) => {
+    newBlogFormRef.current.toggleVisibility();
 
     const response = await blogService.create(newBlog);
-
-    setTitle("");
-    setAuthor("");
-    setUrl("");
 
     setNotification({
       status: "success",
@@ -92,7 +82,22 @@ const App = () => {
       setNotification({});
     }, 5000);
 
-    setBlogs(blogs.concat(response));
+    const updatedListBlogs = await blogService.getAll();
+
+    setBlogs(updatedListBlogs);
+  };
+
+  const addLike = async (updatedBlog) => {
+    await blogService.addLike(updatedBlog);
+
+    setBlogs(
+      blogs.map((blog) => {
+        return {
+          ...blog,
+          likes: blog.id === updatedBlog.id ? blog.likes + 1 : blog.likes,
+        };
+      })
+    );
   };
 
   return (
@@ -112,16 +117,10 @@ const App = () => {
         <>
           <span>{user.username} logged in </span>
           <button onClick={handleLogout}>logout</button>
-          <Create
-            title={title}
-            author={author}
-            url={url}
-            setTitle={setTitle}
-            setAuthor={setAuthor}
-            setUrl={setUrl}
-            handleCreate={handleCreate}
-          />
-          <Blogs user={user} blogs={blogs} />
+          <Togglable buttonLabel="new note" ref={newBlogFormRef}>
+            <Create createNewBlog={createNewBlog} />
+          </Togglable>
+          <Blogs user={user} blogs={blogs} addLike={addLike} />
         </>
       )}
     </>
