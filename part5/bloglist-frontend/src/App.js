@@ -72,7 +72,7 @@ const App = () => {
   const createNewBlog = async (newBlog) => {
     newBlogFormRef.current.toggleVisibility();
 
-    const response = await blogService.create(newBlog);
+    await blogService.create(newBlog);
 
     setNotification({
       status: "success",
@@ -100,6 +100,25 @@ const App = () => {
     );
   };
 
+  const removeBlog = async (blogToRemove) => {
+    if (
+      window.confirm(
+        `Remove blog "${blogToRemove.title}" by ${blogToRemove.author}`
+      )
+    ) {
+      await blogService.removeBlog(blogToRemove.id);
+
+      setBlogs(blogs.filter((blog) => blog.id !== blogToRemove.id));
+      setNotification({
+        status: "error",
+        message: `Successfully removed blog "${blogToRemove.title}" by ${blogToRemove.author}`,
+      });
+      setTimeout(() => {
+        setNotification({});
+      }, 3000);
+    }
+  };
+
   return (
     <>
       <h2>blogs</h2>
@@ -120,7 +139,12 @@ const App = () => {
           <Togglable buttonLabel="new note" ref={newBlogFormRef}>
             <Create createNewBlog={createNewBlog} />
           </Togglable>
-          <Blogs user={user} blogs={blogs} addLike={addLike} />
+          <Blogs
+            user={user}
+            blogs={blogs}
+            addLike={addLike}
+            removeBlog={removeBlog}
+          />
         </>
       )}
     </>

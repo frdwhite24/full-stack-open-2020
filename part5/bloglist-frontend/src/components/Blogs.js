@@ -1,7 +1,7 @@
 import React from "react";
 import Blog from "./Blog";
 
-const Blogs = ({ blogs, addLike }) => {
+const Blogs = ({ blogs, addLike, removeBlog }) => {
   return (
     <div>
       {blogs
@@ -9,7 +9,12 @@ const Blogs = ({ blogs, addLike }) => {
           return b.likes - a.likes;
         })
         .map((blog) => (
-          <Blog key={blog.id} blog={blog} addLike={addLike} />
+          <Blog
+            key={blog.id}
+            blog={blog}
+            addLike={addLike}
+            removeBlog={removeBlog}
+          />
         ))}
     </div>
   );
