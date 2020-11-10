@@ -1,7 +1,7 @@
 import React from "react";
 import Blog from "./Blog";
 
-const Blogs = ({ blogs, addLike, removeBlog }) => {
+const Blogs = ({ user, blogs, addLike, removeBlog }) => {
   return (
     <div>
       {blogs
@@ -10,6 +10,7 @@ const Blogs = ({ blogs, addLike, removeBlog }) => {
         })
         .map((blog) => (
           <Blog
+            user={user}
             key={blog.id}
             blog={blog}
             addLike={addLike}
