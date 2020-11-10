@@ -2,49 +2,46 @@ import React, { useState } from "react";
 
 const Blog = ({ user, blog, addLike, removeBlog }) => {
   const [information, setInformation] = useState(false);
-  const baseStyle = {
+  const blogStyle = {
     border: "1px solid black",
     margin: "5px",
     padding: "10px 5px 10px 5px",
   };
-  const hideWhenInformation = {
-    ...baseStyle,
-    display: information ? "none" : "",
-  };
-  const showWhenInformation = {
-    ...baseStyle,
-    display: information ? "" : "none",
-  };
 
   const toggleInformation = () => setInformation(!information);
 
-  const handleAddLike = () => {
-    addLike({ ...blog, likes: blog.likes + 1, user: blog.user.id });
-  };
-
-  const handleRemoveBlog = () => {
-    removeBlog(blog);
-  };
-
   return (
     <>
-      <div style={hideWhenInformation}>
-        <span>
+      {!information ? (
+        <div style={blogStyle} className="JS__no-info-blog">
+          <span>
+            {blog.title} {blog.author}
+          </span>
+          <button onClick={toggleInformation}>view</button>
+        </div>
+      ) : (
+        <div style={blogStyle} className="JS__full-info-blog">
           {blog.title} {blog.author}
-        </span>
-        <button onClick={toggleInformation}>view</button>
-      </div>
-      <div style={showWhenInformation}>
-        {blog.title} {blog.author}
-        <button onClick={toggleInformation}>hide</button>
-        <p>{blog.url}</p>
-        <span>likes {blog.likes} </span>
-        <button onClick={handleAddLike}>like</button>
-        <p>{blog.user.username}</p>
-        {user.username === blog.user.username && (
-          <button onClick={handleRemoveBlog}>remove</button>
-        )}
-      </div>
+          <button onClick={toggleInformation}>hide</button>
+          {blog?.url && <p>{blog.url}</p>}
+          <span>likes {blog.likes} </span>
+          <button
+            onClick={() =>
+              addLike({
+                ...blog,
+                likes: blog.likes + 1,
+                user: blog.user.id,
+              })
+            }
+          >
+            like
+          </button>
+          {blog?.user?.username && <p>{blog.user.username}</p>}
+          {user?.username === blog?.user?.username && (
+            <button onClick={() => removeBlog(blog)}>remove</button>
+          )}
+        </div>
+      )}
     </>
   );
 };
