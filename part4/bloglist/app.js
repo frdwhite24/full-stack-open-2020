@@ -36,6 +36,11 @@ app.use("/api/blogs", blogsRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/login", loginRouter);
 
+if (process.env.NODE_ENV === "test") {
+  const testRouter = require("./controllers/tests");
+  app.use("/api/testing", testRouter);
+}
+
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 
