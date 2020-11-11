@@ -110,7 +110,7 @@ const App = () => {
 
       setBlogs(blogs.filter((blog) => blog.id !== blogToRemove.id));
       setNotification({
-        status: "error",
+        status: "success",
         message: `Successfully removed blog "${blogToRemove.title}" by ${blogToRemove.author}`,
       });
       setTimeout(() => {

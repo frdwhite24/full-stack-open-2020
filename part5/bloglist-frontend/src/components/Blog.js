@@ -11,21 +11,24 @@ const Blog = ({ user, blog, addLike, removeBlog }) => {
   const toggleInformation = () => setInformation(!information);
 
   return (
-    <>
+    <div className="blog">
       {!information ? (
         <div style={blogStyle} className="JS__no-info-blog">
           <span>
             {blog.title} {blog.author}
           </span>
-          <button onClick={toggleInformation}>view</button>
+          <button className="view-button" onClick={toggleInformation}>
+            view
+          </button>
         </div>
       ) : (
         <div style={blogStyle} className="JS__full-info-blog">
           {blog.title} {blog.author}
           <button onClick={toggleInformation}>hide</button>
           {blog?.url && <p>{blog.url}</p>}
-          <span>likes {blog.likes} </span>
+          <span className="number-likes">likes {blog.likes} </span>
           <button
+            id="like-button"
             onClick={() =>
               addLike({
                 ...blog,
@@ -38,11 +41,13 @@ const Blog = ({ user, blog, addLike, removeBlog }) => {
           </button>
           {blog?.user?.username && <p>{blog.user.username}</p>}
           {user?.username === blog?.user?.username && (
-            <button onClick={() => removeBlog(blog)}>remove</button>
+            <button id="delete-button" onClick={() => removeBlog(blog)}>
+              remove
+            </button>
           )}
         </div>
       )}
-    </>
+    </div>
   );
 };
 

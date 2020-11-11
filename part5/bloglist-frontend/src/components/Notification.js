@@ -19,7 +19,7 @@ const Notification = ({ notification }) => {
   return (
     <>
       {notification.message && (
-        <div className="notification" style={notificationStyle}>
+        <div id="notification" style={notificationStyle}>
           <p>{notification.message}</p>
         </div>
       )}

@@ -3,7 +3,7 @@ import Blog from "./Blog";
 
 const Blogs = ({ user, blogs, addLike, removeBlog }) => {
   return (
-    <div>
+    <div id="blogs">
       {blogs
         .sort((a, b) => {
           return b.likes - a.likes;
