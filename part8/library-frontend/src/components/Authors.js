@@ -29,6 +29,10 @@ const Authors = ({ show }) => {
     return <div>loading...</div>;
   }
 
+  if (!authorQuery.data) {
+    return <div>No authors found, please add a book.</div>;
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -39,41 +43,37 @@ const Authors = ({ show }) => {
   };
 
   return (
-    <>
-      <div>
-        <h2>authors</h2>
-        <table>
-          <tbody>
-            <tr>
-              <th></th>
-              <th>born</th>
-              <th>books</th>
+    <div>
+      <h2>authors</h2>
+      <table>
+        <tbody>
+          <tr>
+            <th></th>
+            <th>born</th>
+            <th>books</th>
+          </tr>
+          {authorQuery.data.allAuthors.map((a) => (
+            <tr key={a.name}>
+              <td>{a.name}</td>
+              <td>{a.born}</td>
+              <td>{a.bookCount}</td>
             </tr>
-            {authorQuery.data.allAuthors.map((a) => (
-              <tr key={a.name}>
-                <td>{a.name}</td>
-                <td>{a.born}</td>
-                <td>{a.bookCount}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div>
-        <h2>Set birthyear</h2>
-        <form onSubmit={handleSubmit}>
-          <Select value={name} onChange={setName} options={options} />
-          <div>
-            born
-            <input
-              value={born}
-              onChange={({ target }) => setBorn(target.value)}
-            />
-          </div>
-          <button type="submit">update author</button>
-        </form>
-      </div>
-    </>
+          ))}
+        </tbody>
+      </table>
+      <h2>Set birthyear</h2>
+      <form onSubmit={handleSubmit}>
+        <Select value={name} onChange={setName} options={options} />
+        <div>
+          born
+          <input
+            value={born}
+            onChange={({ target }) => setBorn(target.value)}
+          />
+        </div>
+        <button type="submit">update author</button>
+      </form>
+    </div>
   );
 };
 

@@ -13,10 +13,13 @@ const Books = ({ show }) => {
     return <div>loading...</div>;
   }
 
+  if (!bookQuery.data) {
+    return <div>No books found, please add one.</div>;
+  }
+
   return (
     <div>
       <h2>books</h2>
-
       <table>
         <tbody>
           <tr>
