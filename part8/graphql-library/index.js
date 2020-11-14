@@ -101,19 +101,19 @@ const resolvers = {
 
       return book.save();
     },
-    editAuthor: (root, args) => {
-      const authorToUpdate = authors.find(
-        (author) => author.name === args.name
-      );
-      if (!authorToUpdate) {
+    editAuthor: async (root, args) => {
+      const foundAuthor = await Author.find({ name: args.name });
+      if (foundAuthor.length === 0) {
         return null;
       }
 
-      const updatedAuthor = { ...authorToUpdate, born: args.setBornTo };
-      authors = authors.map((author) =>
-        author.name === args.name ? updatedAuthor : author
+      return Author.findByIdAndUpdate(
+        foundAuthor[0]._id,
+        {
+          born: args.setBornTo,
+        },
+        { new: true }
       );
-      return updatedAuthor;
     },
   },
   Author: {
