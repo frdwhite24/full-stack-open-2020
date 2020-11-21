@@ -1,4 +1,4 @@
-const calculateBmi = (height: number, weight: number): string => {
+export const calculateBmi = (height: number, weight: number): string => {
   // To account for input of cm
   if (height > 5) {
     height = height / 100;
@@ -19,6 +19,8 @@ const calculateBmi = (height: number, weight: number): string => {
   }
 };
 
-const height: number = Number(process.argv[2]);
-const weight: number = Number(process.argv[3]);
-console.log(calculateBmi(height, weight));
+if (require.main === module) {
+  const height = Number(process.argv[2]);
+  const weight = Number(process.argv[3]);
+  console.log(calculateBmi(height, weight));
+}
