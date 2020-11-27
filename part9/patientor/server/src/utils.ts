@@ -1,6 +1,6 @@
-import { NewPatientEntry, Gender } from "./types";
-
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { NewPatientEntry, Gender } from "./types";
 
 const isString = (value: any): value is string => {
   return typeof value === "string" || value instanceof String;
@@ -35,6 +35,7 @@ const parseGender = (gender: any): Gender => {
   return gender;
 };
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const toNewPatientEntry = (object: any): NewPatientEntry => {
   return {
     name: parseString(object.name),
